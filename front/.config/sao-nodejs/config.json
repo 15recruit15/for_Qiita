@@ -1,0 +1,14 @@
+{
+	"generators": {
+		"40defc71": {
+			"type": "local",
+			"path": "/app/.npm/_npx/8d5e666ab9791957/node_modules/create-nuxt-app/lib",
+			"hash": "40defc71"
+		}
+	},
+	"answers": {
+		"40defc71__npm__": {
+			"gitUsername": "15recruit15"
+		}
+	}
+}

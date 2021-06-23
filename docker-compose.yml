@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb:10.4 
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: touhou
+    ports:
+      - '3306:3306'
+    restart: always
+    volumes:
+      - sample-db:/var/lib/mysql 
+
+  back:
+    build: ./back 
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0' " 
+    volumes:
+      - ./back:/app:cached 
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db 
+    ports:
+      - 3000:3000 
+
+  front:
+    build: ./front
+    command: yarn run dev
+    volumes:
+      - ./front:/app:cached
+    ports:
+      - 8000:3000
+
+volumes:
+  sample-db:
